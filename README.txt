@@ -16,46 +16,6 @@ Todo esto es ejecutado de manera independiente, el arduino es el gestor de seña
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Creditos:
 de los Santos Fabrizzio 6°E
 Baez Lucas 6°E
@@ -65,5 +25,8 @@ Blanco Uriel 6°E
 Solis Mauricio 5°E
 Zaragoza Brandom 5°E
 Bejar Bruno 5°E
+
+Britez Alejandro
+Orlando Alfonso
 
 E.P.E.T. N°1 "UNESCO"
