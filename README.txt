@@ -13,3 +13,57 @@ Gracias a los diseños en fusios y la impresión 3D se logró una dirección que
 
 
 Todo esto es ejecutado de manera independiente, el arduino es el gestor de señales y controlador principal del auto.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Creditos:
+de los Santos Fabrizzio 6°E
+Baez Lucas 6°E
+Da Rosa Jésica 6°E
+Facundo Tangredi 6°E
+Blanco Uriel 6°E
+Solis Mauricio 5°E
+Zaragoza Brandom 5°E
+Bejar Bruno 5°E
+
+E.P.E.T. N°1 "UNESCO"
