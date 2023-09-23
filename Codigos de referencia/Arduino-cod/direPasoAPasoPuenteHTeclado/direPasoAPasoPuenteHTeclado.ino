@@ -1,33 +1,31 @@
 //definicion de pins
-const int motorPin1 = 2;    // 28BYJ48 In1
-const int motorPin2 = 3;    // 28BYJ48 In2
-const int motorPin3 = 4;   // 28BYJ48 In3
-const int motorPin4 = 5;   // 28BYJ48 In4
-
-const int pinENA = 8;//salida PWM para la velocidad de motor
-const int pinIN1 = 9;
-const int pinIN2 = 10;
-
-const int pinIN3 = 11;
-const int pinIN4 = 12;
-const int pinENB = 13;//salida PWM para la velocidad de motor 
-
-const int pinMotorA[3] = { pinENA, pinIN1, pinIN2 };
-const int pinMotorB[3] = { pinENB, pinIN3, pinIN4 };
-
-const int waitTime = 2000;  //espera entre fases 20 seg
-const int speed = 1;    //velocidad de giro
+const int motorPin1 = 3;    // 28BYJ48 In1
+const int motorPin2 = 4;    // 28BYJ48 In2
+const int motorPin3 = 5;   // 28BYJ48 In3
+const int motorPin4 = 6;   // 28BYJ48 In4
 
 //definicion variables
 int motorSpeed = 2400;   //variable para fijar la velocidad
 int stepCounter = 0;     // contador para los pasos
-int stepsPerRev = 400;  // pasos para una vuelta completa
+int stepsPerRev = 350;  // pasos para una vuelta completa
 
-const int sensorPin=8;
+
+const int pinENA = 8; // Salida PWM para la potencia del motor
+const int pinIN1 = 9;
+const int pinIN2 = 10;
+
+// CONFIGURACIÓN DE PINES MOTOR DERECHO
+const int pinIN3 = 11;
+const int pinIN4 = 12;
+const int pinENB = 13; // Salida PWM para potencia del motor
 
 //secuencia media fase
 const int numSteps = 8;
 const int stepsLookup[8] = { B1000, B1100, B0100, B0110, B0010, B0011, B0001, B1001 };
+
+const int pinMotorA[3] = { pinENA, pinIN1, pinIN2 };
+const int pinMotorB[3] = { pinENB, pinIN3, pinIN4 };
+const int speed = 100;    //velocidad de giro
 
 void setup()
 {
@@ -38,29 +36,28 @@ void setup()
   pinMode(motorPin3, OUTPUT);
   pinMode(motorPin4, OUTPUT);
 
-  pinMode(sensorPin, INPUT);
-
+  // DEFINIR PINES DE MOTOR IZQUIERDO COMO SALIDA
+  pinMode(pinENA, OUTPUT);
   pinMode(pinIN1, OUTPUT);
   pinMode(pinIN2, OUTPUT);
-  pinMode(pinENA, OUTPUT);
+
+// DEFINIR PINES DE MOTOR DERECHO COMO SALIDA
+  pinMode(pinENB, OUTPUT);
   pinMode(pinIN3, OUTPUT);
   pinMode(pinIN4, OUTPUT);
-  pinMode(pinENB, OUTPUT);
-  
 }
 
 void loop()
 {
-  moverDelante(pinMotorA, 135);
-  moverDelante(pinMotorB, 135);
-  int sensorValue = digitalRead(sensorPin);
+  AVANZAR(pinMotorA, 135);
+  AVANZAR(pinMotorB, 135);
   int numero = Serial.parseInt();
   if (numero == 1){
     for (int i = 0; i < stepsPerRev ; i++){
       clockwise();
       delayMicroseconds(motorSpeed);
     }
-    delay(1000);
+    delay(25);
     numero=0;
     for (int i = 0; i < stepsPerRev ; i++){
       anticlockwise();
@@ -71,7 +68,7 @@ void loop()
       anticlockwise();
       delayMicroseconds(motorSpeed);
     }
-    delay(1000);
+    delay(25);
     numero=0;
     for (int i = 0; i < stepsPerRev ; i++){
       clockwise();
@@ -79,22 +76,18 @@ void loop()
     }
   }
 }
-
+void AVANZAR(const int pinMotorB[3], int speed){
+  digitalWrite(pinMotorB[1], LOW);
+  digitalWrite(pinMotorB[2], HIGH);
+  // establece velocidad de motor
+  analogWrite(pinMotorB[0], speed);
+}
 void clockwise()
 {
   stepCounter++;
   if (stepCounter >= numSteps) stepCounter = 0;
   setOutput(stepCounter);
 }
-
-void moverDelante(const int pinMotor[3], int speed)
-{
-  digitalWrite(pinMotor[1], LOW);
-  digitalWrite(pinMotor[2], HIGH);
-  //establece velocidad de motor
-  analogWrite(pinMotor[0], speed);
-}
-
 void anticlockwise()
 {
   stepCounter--;
